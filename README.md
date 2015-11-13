@@ -1,3 +1,4 @@
+##  Similarity SQL-based Group-By operator
 The SQL group-by operator plays an important role in summarizing and aggregating large datasets in a data analytics
 stack. The Similarity SQL-based
 Group-By operator (SGB, for short) extends the semantics of the standard SQL Group-by by grouping data with similar but not
