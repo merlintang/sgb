@@ -33,32 +33,32 @@ insert into tmp values (2, 3.0,4.0)
 
 //execute query
 //SGB-All
-             select  avg(col1) as centerx, avg(col2) as centery
-   			 min(col1) as p1x, min(col2) as p1y
-   			 max(col1) as p2x, max(col2) as p2y from tmp
-   			 group by col1, col2 distanceall within 2
-   			 on_overlap any 
-   			 metric lone;
-   			 
-   			 select  avg(col1) as centerx, avg(col2) as centery
-   			 min(col1) as p1x, min(col2) as p1y
-   			 max(col1) as p2x, max(col2) as p2y from tmp
-   			 group by col1, col2 distanceall within 2
-   			 on_overlap eliminate 
-   			 metric lone;
-   			 
-   			 select  avg(col1) as centerx, avg(col2) as centery
-   			 min(col1) as p1x, min(col2) as p1y
-   			 max(col1) as p2x, max(col2) as p2y from tmp
-   			 group by col1, col2 distanceall within 2
-   			 on_overlap new_group 
-   			 metric lone;
+select  avg(col1) as centerx, avg(col2) as centery
+min(col1) as p1x, min(col2) as p1y
+max(col1) as p2x, max(col2) as p2y from tmp
+group by col1, col2 distanceall within 2
+on_overlap any 
+metric lone;
+
+select  avg(col1) as centerx, avg(col2) as centery
+min(col1) as p1x, min(col2) as p1y
+max(col1) as p2x, max(col2) as p2y from tmp
+group by col1, col2 distanceall within 2
+on_overlap eliminate 
+metric lone;
+
+select  avg(col1) as centerx, avg(col2) as centery
+min(col1) as p1x, min(col2) as p1y
+max(col1) as p2x, max(col2) as p2y from tmp
+group by col1, col2 distanceall within 2
+on_overlapnew_group 
+metric lone;             
    			 
 
 //SGB-Any	 
-   			 select  avg(col1) as centerx, avg(col2) as centery
-   			 min(col1) as p1x, min(col2) as p1y
-   			 max(col1) as p2x, max(col2) as p2y from table
-   			 group by col1, col2 distanceany within 2
-   		     metric lone;
+select  avg(col1) as centerx, avg(col2) as centery
+min(col1) as p1x, min(col2) as p1y
+max(col1) as p2x, max(col2) as p2y from tmp
+group by col1, col2 distanceany within 2
+metric lone;
 
