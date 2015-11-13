@@ -1,4 +1,11 @@
-The similarity group-by operators (short as SGB) perform the similair function as clustering algorithm for two dimenisonal data. The major difference is that SGB perform data clustering inside the database kernel, and work with the database pipeline to win performance.    
+The SQL group-by operator plays an important role in summarizing and aggregating large datasets in a data analytics
+stack. The Similarity SQL-based
+Group-By operator (SGB, for short) extends the semantics of the standard SQL Group-by by grouping data with similar but not
+necessarily equal values. While existing similarity-based grouping operators efficiently realize these approximate semantics,
+they primarily focus on one-dimensional attributes and treat multi-dimensional attributes independently. However, correlated
+attributes, such as in spatial data, are processed independently, and hence, groups in the multi-dimensional space are not
+detected properly. To address this problem, we introduce two new SGB operators for multi-dimensional data. We implement and test the new SGB operators and their algorithms inside PostgreSQL. The overhead introduced by these operators proves to be minimal and the execution times are comparable to those of the standard Group-by. The experimental study, based on TPC-H and a social check-in data, demonstrates that the proposed algorithms can achieve up to three orders of magnitude
+enhancement in performance over baseline methods developed to solve the same problem.   
 
 ##Documentation
 Similarity Group-by Operators for Multi-dimensional Relational Data
