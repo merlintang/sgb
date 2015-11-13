@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Extensibility</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REV="MADE"
+HREF="mailto:pgsql-docs@postgresql.org"><LINK
+REL="HOME"
+TITLE="PostgreSQL 8.2.4 Documentation"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="GIN Indexes"
+HREF="gin.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction"
+HREF="gin-intro.html"><LINK
+REL="NEXT"
+TITLE="Implementation"
+HREF="gin-implementation.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-1"><META
+NAME="creation"
+CONTENT="2007-04-20T05:07:35"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="5"
+ALIGN="center"
+VALIGN="bottom"
+>PostgreSQL 8.2.4 Documentation</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gin-intro.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gin.html"
+>Fast Backward</A
+></TD
+><TD
+WIDTH="60%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 51. GIN Indexes</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gin.html"
+>Fast Forward</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gin-implementation.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="GIN-EXTENSIBILITY"
+>51.2. Extensibility</A
+></H1
+><P
+>   The <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> interface has a high level of abstraction,
+   requiring the access method implementer only to implement the semantics of
+   the data type being accessed.  The <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> layer itself
+   takes care of concurrency, logging and searching the tree structure.
+ </P
+><P
+>   All it takes to get a <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> access method working
+   is to implement four user-defined methods, which define the behavior of
+   keys in the tree and the relationships between keys, indexed values,
+   and indexable queries. In short, <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> combines
+   extensibility with generality, code reuse, and a clean interface.
+ </P
+><P
+>   The four methods that an index operator class for
+   <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> must provide are:
+ </P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>int compare(Datum a, Datum b)</DT
+><DD
+><P
+>       Compares keys (not indexed values!) and returns an integer less than
+       zero, zero, or greater than zero, indicating whether the first key is
+       less than, equal to, or greater than the second.
+      </P
+></DD
+><DT
+>Datum* extractValue(Datum inputValue, uint32 *nkeys)</DT
+><DD
+><P
+>       Returns an array of keys given a value to be indexed.  The
+       number of returned keys must be stored into <TT
+CLASS="LITERAL"
+>*nkeys</TT
+>.
+      </P
+></DD
+><DT
+>Datum* extractQuery(Datum query, uint32 *nkeys,
+        StrategyNumber n)</DT
+><DD
+><P
+>       Returns an array of keys given a value to be queried; that is,
+       <TT
+CLASS="LITERAL"
+>query</TT
+> is the value on the right-hand side of an
+       indexable operator whose left-hand side is the indexed column.
+       <TT
+CLASS="LITERAL"
+>n</TT
+> is the strategy number of the operator within the
+       operator class (see <A
+HREF="xindex.html#XINDEX-STRATEGIES"
+>Section 33.14.2</A
+>).
+       Often, <CODE
+CLASS="FUNCTION"
+>extractQuery</CODE
+> will need
+       to consult <TT
+CLASS="LITERAL"
+>n</TT
+> to determine the data type of
+       <TT
+CLASS="LITERAL"
+>query</TT
+> and the key values that need to be extracted.
+       The number of returned keys must be stored into <TT
+CLASS="LITERAL"
+>*nkeys</TT
+>.
+      </P
+></DD
+><DT
+>bool consistent(bool check[], StrategyNumber n, Datum query)</DT
+><DD
+><P
+>       Returns TRUE if the indexed value satisfies the query operator with
+       strategy number <TT
+CLASS="LITERAL"
+>n</TT
+> (or may satisfy, if the operator is
+       marked RECHECK in the operator class).  The <TT
+CLASS="LITERAL"
+>check</TT
+> array has
+       the same length as the number of keys previously returned by
+       <CODE
+CLASS="FUNCTION"
+>extractQuery</CODE
+> for this query.  Each element of the
+       <TT
+CLASS="LITERAL"
+>check</TT
+> array is TRUE if the indexed value contains the
+       corresponding query key, ie, if (check[i] == TRUE) the i-th key of the
+       <CODE
+CLASS="FUNCTION"
+>extractQuery</CODE
+> result array is present in the indexed value.
+       The original <TT
+CLASS="LITERAL"
+>query</TT
+> datum (not the extracted key array!) is
+       passed in case the <CODE
+CLASS="FUNCTION"
+>consistent</CODE
+> method needs to consult it.
+      </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gin-intro.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gin-implementation.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Introduction</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="gin.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Implementation</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

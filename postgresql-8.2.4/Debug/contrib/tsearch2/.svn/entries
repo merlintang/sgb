@@ -1,0 +1,56 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/Debug/contrib/tsearch2
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+ispell
+dir
+
+
+
+add
+
+snowball
+dir
+
+
+
+add
+
+subdir.mk
+file
+
+
+
+add
+
+wordparser
+dir
+
+
+
+add
+

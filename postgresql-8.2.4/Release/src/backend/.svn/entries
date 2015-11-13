@@ -1,0 +1,154 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/Release/src/backend
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+access
+dir
+
+
+
+add
+
+bootstrap
+dir
+
+
+
+add
+
+catalog
+dir
+
+
+
+add
+
+commands
+dir
+
+
+
+add
+
+executor
+dir
+
+
+
+add
+
+lib
+dir
+
+
+
+add
+
+libpq
+dir
+
+
+
+add
+
+main
+dir
+
+
+
+add
+
+nodes
+dir
+
+
+
+add
+
+optimizer
+dir
+
+
+
+add
+
+parser
+dir
+
+
+
+add
+
+port
+dir
+
+
+
+add
+
+postmaster
+dir
+
+
+
+add
+
+regex
+dir
+
+
+
+add
+
+rewrite
+dir
+
+
+
+add
+
+storage
+dir
+
+
+
+add
+
+tcop
+dir
+
+
+
+add
+
+utils
+dir
+
+
+
+add
+

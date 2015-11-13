@@ -1,0 +1,419 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>XML Document Support</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REV="MADE"
+HREF="mailto:pgsql-docs@postgresql.org"><LINK
+REL="HOME"
+TITLE="PostgreSQL 8.2.4 Documentation"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Data Types"
+HREF="datatype.html"><LINK
+REL="PREVIOUS"
+TITLE="Pseudo-Types"
+HREF="datatype-pseudo.html"><LINK
+REL="NEXT"
+TITLE="Functions and Operators"
+HREF="functions.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-1"><META
+NAME="creation"
+CONTENT="2007-04-20T05:07:35"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="5"
+ALIGN="center"
+VALIGN="bottom"
+>PostgreSQL 8.2.4 Documentation</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="datatype-pseudo.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="datatype.html"
+>Fast Backward</A
+></TD
+><TD
+WIDTH="60%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 8. Data Types</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="datatype.html"
+>Fast Forward</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="functions.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="DATATYPE-XML"
+>8.14. <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> Document Support</A
+></H1
+><A
+NAME="AEN6248"
+></A
+><P
+>    <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> (Extensible Markup Language) support is not one
+    capability, but a variety of features supported by a database
+    system. These capabilities include storage, import/export,
+    validation, indexing, efficiency of modification, searching,
+    transforming, and <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> to <ACRONYM
+CLASS="ACRONYM"
+>SQL</ACRONYM
+> mapping.
+    <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> supports some but not all of these
+    <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> capabilities. Future releases of
+    <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> will continue to improve <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+>
+    support. For an overview of <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> use in databases, see <A
+HREF="http://www.rpbourret.com/xml/XMLAndDatabases.htm"
+TARGET="_top"
+>http://www.rpbourret.com/xml/XMLAndDatabases.htm</A
+>.
+   </P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+>Storage</DT
+><DD
+><P
+>      PostgreSQL does not have a specialized <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> data type.
+      Users should store <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> documents in ordinary
+      <TT
+CLASS="TYPE"
+>TEXT</TT
+> fields. If you need the document split apart into
+      its component parts so each element is stored separately, you must
+      use a middle-ware solution to do that, but once done, the data
+      becomes relational and has to be processed accordingly.
+     </P
+></DD
+><DT
+>Import/Export</DT
+><DD
+><P
+>      There is no facility for mapping <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> to relational
+      tables. An external tool must be used for this. One simple way to
+      export <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> is to use <SPAN
+CLASS="APPLICATION"
+>psql</SPAN
+> in
+      <ACRONYM
+CLASS="ACRONYM"
+>HTML</ACRONYM
+> mode (<TT
+CLASS="LITERAL"
+>\pset format html</TT
+>), and convert
+      the <ACRONYM
+CLASS="ACRONYM"
+>XHTML</ACRONYM
+> output to XML using an external tool.
+     </P
+></DD
+><DT
+>Validation</DT
+><DD
+><P
+>      <TT
+CLASS="FILENAME"
+>/contrib/xml2</TT
+> has a function called
+      <CODE
+CLASS="FUNCTION"
+>xml_is_well_formed()</CODE
+> that can be used in a <TT
+CLASS="LITERAL"
+>CHECK</TT
+>
+      constraint to enforce that a field contains well-formed <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+>.
+      It does not support validation against a specific <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+>
+      schema. A server-side language with <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> capabilities
+      could be used to do schema-specific <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> checks.
+     </P
+></DD
+><DT
+>Indexing</DT
+><DD
+><P
+>      <TT
+CLASS="FILENAME"
+>/contrib/xml2</TT
+> functions can be used in expression
+      indexes to index specific <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> fields. To index the
+      full contents of <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> documents, the full-text indexing
+      tool <TT
+CLASS="FILENAME"
+>/contrib/tsearch2</TT
+> can be used. Of course,
+      Tsearch2 indexes have no <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> awareness so additional
+      <TT
+CLASS="FILENAME"
+>/contrib/xml2</TT
+> checks should be added to queries.
+     </P
+></DD
+><DT
+>Modification</DT
+><DD
+><P
+>      If an <TT
+CLASS="COMMAND"
+>UPDATE</TT
+> does not modify an <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> field,
+      the <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> data is shared between the old and new rows.
+      However, if the <TT
+CLASS="COMMAND"
+>UPDATE</TT
+> modifies an <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+>
+      field, a full modified copy of the <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> field must be
+      created internally.
+     </P
+></DD
+><DT
+>Searching</DT
+><DD
+><P
+>      XPath searches are implemented using <TT
+CLASS="FILENAME"
+>/contrib/xml2</TT
+>.
+      It processes <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> text documents and returns results
+      based on the requested query.
+     </P
+></DD
+><DT
+>Transforming</DT
+><DD
+><P
+>      <TT
+CLASS="FILENAME"
+>/contrib/xml2</TT
+> supports <ACRONYM
+CLASS="ACRONYM"
+>XSLT</ACRONYM
+> (Extensible
+      Stylesheet Language Transformation).
+     </P
+></DD
+><DT
+>XML to SQL Mapping</DT
+><DD
+><P
+>      This involves converting <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> data to and from
+      relational structures. <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> has no internal
+      support for such mapping, and relies on external tools to do such
+      conversions.
+     </P
+></DD
+><DT
+>Missing Features</DT
+><DD
+><P
+>      Missing features include XQuery, SQL/XML syntax (ISO/IEC
+      9075-14), and an <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> data type optimized for
+      <ACRONYM
+CLASS="ACRONYM"
+>XML</ACRONYM
+> storage.
+     </P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="datatype-pseudo.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="functions.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Pseudo-Types</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="datatype.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Functions and Operators</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,266 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/src/backend/utils/mb/conversion_procs
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+Makefile
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+README.euc_jp
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+ascii_and_mic
+dir
+
+
+
+add
+
+conversion_create.sql
+file
+
+
+
+add
+
+cyrillic_and_mic
+dir
+
+
+
+add
+
+euc_cn_and_mic
+dir
+
+
+
+add
+
+euc_jp_and_sjis
+dir
+
+
+
+add
+
+euc_kr_and_mic
+dir
+
+
+
+add
+
+euc_tw_and_big5
+dir
+
+
+
+add
+
+latin2_and_win1250
+dir
+
+
+
+add
+
+latin_and_mic
+dir
+
+
+
+add
+
+proc.mk
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+regress_epilogue
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+regress_prolog
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+utf8_and_ascii
+dir
+
+
+
+add
+
+utf8_and_big5
+dir
+
+
+
+add
+
+utf8_and_cyrillic
+dir
+
+
+
+add
+
+utf8_and_euc_cn
+dir
+
+
+
+add
+
+utf8_and_euc_jp
+dir
+
+
+
+add
+
+utf8_and_euc_kr
+dir
+
+
+
+add
+
+utf8_and_euc_tw
+dir
+
+
+
+add
+
+utf8_and_gb18030
+dir
+
+
+
+add
+
+utf8_and_gbk
+dir
+
+
+
+add
+
+utf8_and_iso8859
+dir
+
+
+
+add
+
+utf8_and_iso8859_1
+dir
+
+
+
+add
+
+utf8_and_johab
+dir
+
+
+
+add
+
+utf8_and_sjis
+dir
+
+
+
+add
+
+utf8_and_uhc
+dir
+
+
+
+add
+
+utf8_and_win
+dir
+
+
+
+add
+

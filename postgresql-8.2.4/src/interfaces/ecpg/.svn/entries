@@ -1,0 +1,112 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/src/interfaces/ecpg
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+ChangeLog
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+Makefile
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+README.dynSQL
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+compatlib
+dir
+
+
+
+add
+
+ecpglib
+dir
+
+
+
+add
+
+include
+dir
+
+
+
+add
+
+pgtypeslib
+dir
+
+
+
+add
+
+preproc
+dir
+
+
+
+add
+
+test
+dir
+
+
+
+add
+

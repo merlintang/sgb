@@ -1,0 +1,147 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/src/interfaces/ecpg/test
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+Makefile
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+Makefile.regress
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+compat_informix
+dir
+
+
+
+add
+
+connect
+dir
+
+
+
+add
+
+expected
+dir
+
+
+
+add
+
+performance
+dir
+
+
+
+add
+
+pg_regress
+file
+
+
+
+add
+
+pg_regress.sh
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+pgtypeslib
+dir
+
+
+
+add
+
+preproc
+dir
+
+
+
+add
+
+regression.h
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+sql
+dir
+
+
+
+add
+
+thread
+dir
+
+
+
+add
+

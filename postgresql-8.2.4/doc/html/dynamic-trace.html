@@ -1,0 +1,520 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Dynamic Tracing</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REV="MADE"
+HREF="mailto:pgsql-docs@postgresql.org"><LINK
+REL="HOME"
+TITLE="PostgreSQL 8.2.4 Documentation"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Monitoring Database Activity"
+HREF="monitoring.html"><LINK
+REL="PREVIOUS"
+TITLE="Viewing Locks"
+HREF="monitoring-locks.html"><LINK
+REL="NEXT"
+TITLE="Monitoring Disk Usage"
+HREF="diskusage.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-1"><META
+NAME="creation"
+CONTENT="2007-04-20T05:07:35"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="5"
+ALIGN="center"
+VALIGN="bottom"
+>PostgreSQL 8.2.4 Documentation</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="monitoring-locks.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="monitoring.html"
+>Fast Backward</A
+></TD
+><TD
+WIDTH="60%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 25. Monitoring Database Activity</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="monitoring.html"
+>Fast Forward</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="diskusage.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="DYNAMIC-TRACE"
+>25.4. Dynamic Tracing</A
+></H1
+><A
+NAME="AEN25989"
+></A
+><P
+>   <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+> provides facilities to support
+   dynamic tracing of the database server. This allows an external
+   utility to be called at specific points in the code and thereby trace
+   execution.  Currently, this facility is primarily intended for use by
+   database developers, as it requires substantial familiarity with the code.
+  </P
+><P
+>   A number of trace points, often called probes, are already inserted
+   into the source code.  By default these probes are disabled, and
+   the user needs to explicitly tell the configure script to make the
+   probes available in <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+>.
+  </P
+><P
+> 
+   Currently, only the DTrace utility is supported, which is only available
+   on Solaris Express and Solaris 10+. It is expected that DTrace will
+   be available in the future on FreeBSD and Mac OS X.
+   Supporting other dynamic tracing utilities is theoretically possible by
+   changing the definitions for the <TT
+CLASS="LITERAL"
+>PG_TRACE</TT
+> macros in
+   <TT
+CLASS="FILENAME"
+>src/include/pg_trace.h</TT
+>.
+  </P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="COMPILING-FOR-TRACE"
+>25.4.1. Compiling for Dynamic Tracing</A
+></H2
+><P
+>   By default, trace points are disabled, so you will need to
+   explicitly tell the configure script to make the probes available
+   in <SPAN
+CLASS="PRODUCTNAME"
+>PostgreSQL</SPAN
+>. To include DTrace support
+   specify <TT
+CLASS="OPTION"
+>--enable-dtrace</TT
+> to configure.  See <A
+HREF="install-procedure.html"
+>Section 14.5</A
+> for further information.
+  </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="TRACE-POINTS"
+>25.4.2. Built-in Trace Points</A
+></H2
+><P
+>   A few standard trace points are provided in the source code
+   (of course, more can be added as needed for a particular problem).
+   These are shown in <A
+HREF="dynamic-trace.html#TRACE-POINT-TABLE"
+>Table 25-3</A
+>.
+  </P
+><DIV
+CLASS="TABLE"
+><A
+NAME="TRACE-POINT-TABLE"
+></A
+><P
+><B
+>Table 25-3. Built-in Trace Points</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><COL><COL><COL><THEAD
+><TR
+><TH
+>Name</TH
+><TH
+>Parameters</TH
+><TH
+>Overview</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>transaction__start</TD
+><TD
+>(int transactionId)</TD
+><TD
+>The start of a new transaction.</TD
+></TR
+><TR
+><TD
+>transaction__commit</TD
+><TD
+>(int transactionId)</TD
+><TD
+>The successful completion of a transaction.</TD
+></TR
+><TR
+><TD
+>transaction__abort</TD
+><TD
+>(int transactionId)</TD
+><TD
+>The unsuccessful completion of a transaction.</TD
+></TR
+><TR
+><TD
+>lwlock__acquire</TD
+><TD
+>(int lockid, int mode)</TD
+><TD
+>An LWLock has been acquired.</TD
+></TR
+><TR
+><TD
+>lwlock__release</TD
+><TD
+>(int lockid, int mode)</TD
+><TD
+>An LWLock has been released.</TD
+></TR
+><TR
+><TD
+>lwlock__startwait</TD
+><TD
+>(int lockid, int mode)</TD
+><TD
+>An LWLock was not immediately available and a backend
+       has begun to wait for the lock to become available.
+     </TD
+></TR
+><TR
+><TD
+>lwlock__endwait</TD
+><TD
+>(int lockid, int mode)</TD
+><TD
+>A backend has been released from its wait for an LWLock.
+     </TD
+></TR
+><TR
+><TD
+>lwlock__condacquire</TD
+><TD
+>(int lockid, int mode)</TD
+><TD
+>An LWLock was successfully acquired when the caller specified no
+      waiting.
+     </TD
+></TR
+><TR
+><TD
+>lwlock__condacquire__fail</TD
+><TD
+>(int lockid, int mode)</TD
+><TD
+>An LWLock was not successfully acquired when the caller specified
+      no waiting.
+     </TD
+></TR
+><TR
+><TD
+>lock__startwait</TD
+><TD
+>(int locktag_field2, int lockmode)</TD
+><TD
+>A request for a heavyweight lock (lmgr lock) has begun to wait
+      because the lock is not available.
+     </TD
+></TR
+><TR
+><TD
+>lock__endwait</TD
+><TD
+>(int locktag_field2, int lockmode)</TD
+><TD
+>A request for a heavyweight lock (lmgr lock) has finished waiting
+      (i.e., has acquired the lock).
+     </TD
+></TR
+></TBODY
+></TABLE
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="USING-TRACE-POINTS"
+>25.4.3. Using Trace Points</A
+></H2
+><P
+>   The example below shows a DTrace script for analyzing transaction
+   counts on the system, as an alternative to snapshotting 
+   <TT
+CLASS="STRUCTNAME"
+>pg_stat_database</TT
+> before and after a performance test.
+</P><PRE
+CLASS="PROGRAMLISTING"
+>#!/usr/sbin/dtrace -qs 
+
+postgresql$1:::transaction-start
+{
+      @start["Start"] = count();
+      self-&#62;ts  = timestamp;
+}
+
+postgresql$1:::transaction-abort
+{
+      @abort["Abort"] = count();
+}
+
+postgresql$1:::transaction-commit
+/self-&#62;ts/
+{
+      @commit["Commit"] = count();
+      @time["Total time (ns)"] = sum(timestamp - self-&#62;ts);
+      self-&#62;ts=0;
+}</PRE
+><P>
+   Note how the double underline in trace point names needs to
+   be replaced by a hyphen when using D script.
+   When executed, the example D script gives output such as:
+</P><PRE
+CLASS="SCREEN"
+># ./txn_count.d `pgrep -n postgres`
+^C
+
+Start                                          71
+Commit                                         70
+Total time (ns)                        2312105013</PRE
+><P>
+  </P
+><P
+>   You should remember that trace programs need to be carefully written and
+   debugged prior to their use, otherwise the trace information collected may
+   be meaningless. In most cases where problems are found it is the 
+   instrumentation that is at fault, not the underlying system. When 
+   discussing information found using dynamic tracing, be sure to enclose
+   the script used to allow that too to be checked and discussed.
+  </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="DEFINING-TRACE-POINTS"
+>25.4.4. Defining Trace Points</A
+></H2
+><P
+>   New trace points can be defined within the code wherever the developer
+   desires, though this will require a recompilation.
+  </P
+><P
+>   A trace point can be inserted by using one of the
+   trace macros. These are chosen according to how many variables will
+   be made available for inspection at that trace point. Tracing the
+   occurrence of an event can be achieved with a single line, using
+   just the trace point name, e.g.
+</P><PRE
+CLASS="PROGRAMLISTING"
+>PG_TRACE (my__new__trace__point);</PRE
+><P>
+   More complex trace points can be provided with one or more variables
+   for inspection by the dynamic tracing utility by using the
+   <TT
+CLASS="LITERAL"
+>PG_TRACE</TT
+><TT
+CLASS="REPLACEABLE"
+><I
+>n</I
+></TT
+> macro that corresponds to the number
+   of parameters after the trace point name:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>PG_TRACE3 (my__complex__event, varX, varY, varZ);</PRE
+><P>
+   The definition of the transaction__start trace point is shown below:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>static void
+StartTransaction(void)
+{
+    ...
+
+    /*
+     * generate a new transaction id
+     */
+    s-&#62;transactionId = GetNewTransactionId(false);
+
+    XactLockTableInsert(s-&#62;transactionId);
+
+    PG_TRACE1(transaction__start, s-&#62;transactionId);
+
+    ...
+}    </PRE
+><P>
+   Note how the transaction ID is made available to the dynamic tracing
+   utility.
+  </P
+><P
+>   The dynamic tracing utility may require you to further define these trace
+   points.  For example, DTrace requires you to add new probes to the file
+   <TT
+CLASS="FILENAME"
+>src/backend/utils/probes.d</TT
+> as shown here:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>provider postgresql {
+      ...
+      probe transaction__start(int);
+      ...
+ };</PRE
+><P>
+  </P
+><P
+>   You should take care that the data types specified for the probe arguments
+   match the datatypes of the variables used in the <TT
+CLASS="LITERAL"
+>PG_TRACE</TT
+>
+   macro. This is not checked at compile time. You can check that your newly
+   added trace point is available by recompiling, then running the new binary,
+   and as root, executing a DTrace command such as:
+</P><PRE
+CLASS="PROGRAMLISTING"
+>dtrace -l -n transaction-start</PRE
+><P>
+  </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="monitoring-locks.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="diskusage.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Viewing Locks</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="monitoring.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Monitoring Disk Usage</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

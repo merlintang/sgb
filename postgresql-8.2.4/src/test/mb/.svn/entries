@@ -1,0 +1,70 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/src/test/mb
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+expected
+dir
+
+
+
+add
+
+mbregress.sh
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+readme
+file
+
+
+
+add
+
+
+
+
+
+has-props
+has-prop-mods
+
+sql
+dir
+
+
+
+add
+

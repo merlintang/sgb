@@ -1,0 +1,273 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/.csettings
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+0.348355104_cdtBuildSystem
+file
+
+
+
+add
+
+0.348355104_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+0.348355104_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+0.348355104_scannerConfiguration
+file
+
+
+
+add
+
+0.485218917_cdtBuildSystem
+file
+
+
+
+add
+
+0.485218917_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+0.485218917_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+0.485218917_scannerConfiguration
+file
+
+
+
+add
+
+0.741095013_cdtBuildSystem
+file
+
+
+
+add
+
+0.741095013_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+0.741095013_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+0.741095013_scannerConfiguration
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1090240213_cdtBuildSystem
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1090240213_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1090240213_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1090240213_org.eclipse.cdt.make.core.buildtargets
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1090240213_scannerConfiguration
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1370867595_cdtBuildSystem
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1370867595_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1370867595_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1370867595_scannerConfiguration
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1661538746_cdtBuildSystem
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1661538746_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1661538746_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1661538746_org.eclipse.cdt.make.core.buildtargets
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1661538746_scannerConfiguration
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1945018545_cdtBuildSystem
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1945018545_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1945018545_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.1945018545_scannerConfiguration
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.861330532_cdtBuildSystem
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.861330532_org.eclipse.cdt.core.externalSettings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.861330532_org.eclipse.cdt.core.settings
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.861330532_org.eclipse.cdt.make.core.buildtargets
+file
+
+
+
+add
+
+cdt.managedbuild.toolchain.gnu.base.861330532_scannerConfiguration
+file
+
+
+
+add
+

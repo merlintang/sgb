@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Limitations</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"><LINK
+REV="MADE"
+HREF="mailto:pgsql-docs@postgresql.org"><LINK
+REL="HOME"
+TITLE="PostgreSQL 8.2.4 Documentation"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="GIN Indexes"
+HREF="gin.html"><LINK
+REL="PREVIOUS"
+TITLE="GIN tips and tricks"
+HREF="gin-tips.html"><LINK
+REL="NEXT"
+TITLE="Examples"
+HREF="gin-examples.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="stylesheet.css"><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html; charset=ISO-8859-1"><META
+NAME="creation"
+CONTENT="2007-04-20T05:07:35"></HEAD
+><BODY
+CLASS="SECT1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="5"
+ALIGN="center"
+VALIGN="bottom"
+>PostgreSQL 8.2.4 Documentation</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gin-tips.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gin.html"
+>Fast Backward</A
+></TD
+><TD
+WIDTH="60%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 51. GIN Indexes</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gin.html"
+>Fast Forward</A
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gin-examples.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="GIN-LIMIT"
+>51.5. Limitations</A
+></H1
+><P
+>  <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> doesn't support full index scans: because there are
+  often many keys per value, each heap pointer would be returned many times,
+  and there is no easy way to prevent this.
+ </P
+><P
+>  When <CODE
+CLASS="FUNCTION"
+>extractQuery</CODE
+> returns zero keys,
+  <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> will emit an error.  Depending on the operator,
+  a void query might match all, some, or none of the indexed values (for
+  example, every array contains the empty array, but does not overlap the
+  empty array), and <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> can't determine the correct
+  answer, nor produce a full-index-scan result if it could determine that
+  that was correct.
+ </P
+><P
+>  It is not an error for <CODE
+CLASS="FUNCTION"
+>extractValue</CODE
+> to return zero keys,
+  but in this case the indexed value will be unrepresented in the index.
+  This is another reason why full index scan is not useful &mdash; it would
+  miss such rows.
+ </P
+><P
+>  <ACRONYM
+CLASS="ACRONYM"
+>GIN</ACRONYM
+> searches keys only by equality matching.  This may
+  be improved in future.
+ </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gin-tips.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gin-examples.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>GIN tips and tricks</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="gin.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Examples</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

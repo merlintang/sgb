@@ -1,0 +1,264 @@
+LOG:  could not bind IPv4 socket: Address already in use
+HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+LOG:  database system was shut down at 2009-02-04 13:50:35 EST
+LOG:  checkpoint record is at 0/440320
+LOG:  redo record is at 0/440320; undo record is at 0/0; shutdown TRUE
+LOG:  next transaction ID: 0/645; next OID: 16391
+LOG:  next MultiXactId: 1; next MultiXactOffset: 0
+LOG:  database system is ready
+LOG:  received SIGHUP, reloading configuration files
+ERROR:  table "part" does not exist
+STATEMENT:  DROP TABLE PART;
+	CREATE TABLE PART(
+	P_PARTKEY integer,
+	P_NAME    varchar(55),
+	P_MFGR    char(25),
+	P_BRAND       char(10),
+	P_TYPE        varchar(25),
+	P_SIZE        integer,
+	P_CONTAINER   char(10),
+	P_RETAILPRICE decimal,
+	P_COMMENT     varchar(23)
+	);
+	
+	DROP TABLE SUPPLIER;
+	CREATE TABLE SUPPLIER (
+	S_SUPPKEY   integer,
+	S_NAME      char(25),
+	S_ADDRESS   varchar(40),
+	S_NATIONKEY integer,
+	S_PHONE     char(15),
+	S_ACCTBAL   decimal,
+	S_COMMENT   varchar(101)
+	);
+	
+	DROP TABLE PARTSUPP;
+	CREATE TABLE PARTSUPP (
+	PS_PARTKEY              integer,
+	PS_SUPPKEY              integer,
+	PS_AVAILQTY             integer,
+	PS_SUPPLYCOST           decimal,
+	PS_COMMENT              varchar(199)
+	);
+	
+	DROP TABLE ORDERS;
+	CREATE TABLE ORDERS(
+	O_ORDERKEY           integer,
+	O_CUSTKEY            integer,
+	O_ORDERSTATUS        char(1),
+	O_TOTALPRICE         decimal,
+	O_ORDERDATE          date,
+	O_ORDERPRIORITY      char(15),
+	O_CLERK              char(15),
+	O_SHIPPRIORITY       integer,
+	O_COMMENT            varchar(79)
+	);
+	
+	DROP TABLE LINEITEM;
+	CREATE TABLE LINEITEM(
+	  L_ORDERKEY                     integer,
+	  L_PARTKEY                      integer,
+	  L_SUPPKEY                      integer,
+	  L_LINENUMBER                   integer,
+	  L_QUANTITY                     decimal,
+	  L_EXTENDEDPRICE                decimal,
+	  L_DISCOUNT                     decimal,
+	  L_TAX                          decimal,
+	  L_RETURNFLAG                   char(1),
+	  L_LINESTATUS                   char(1),
+	  L_SHIPDATE                     date,
+	  L_COMMITDATE                   date,
+	  L_RECEIPTDATE                  date,
+	  L_SHIPINSTRUCT                 char(25),
+	  L_SHIPMODE                     char(10),
+	  L_COMMENT                      varchar(44)
+	);
+	
+	DROP TABLE NATION;
+	CREATE TABLE NATION(
+	N_NATIONKEY          integer,
+	N_NAME               char(25),
+	N_REGIONKEY          integer,
+	N_COMMENT            varchar(152)
+	);
+	
+	DROP TABLE REGION;
+	CREATE TABLE REGION(
+	R_REGIONKEY          integer,
+	R_NAME               char(25),
+	R_COMMENT            varchar(152)
+	);
+	
+	
+	DROP TABLE CUSTOMER;
+	CREATE TABLE CUSTOMER (
+	C_CUSTKEY   integer,
+	C_NAME      varchar(25),
+	C_ADDRESS   varchar(40),
+	C_NATIONKEY integer,
+	C_PHONE     char(15),
+	C_ACCTBAL   integer,
+	C_COMMENT   varchar(117)
+	);
+ERROR:  extra data after last expected column
+CONTEXT:  COPY customer, line 1: "1|Customer#000000001|IVhzIApeRb ot,c,E|15|25-989-741-2988|1710|BUILDING|to the even, regular platele..."
+STATEMENT:  COPY CUSTOMER FROM '/home/postgres/SGB/dbgen_SGBDemo/customer.tbl' WITH DELIMITER '|';
+	
+ERROR:  could not open file "/home/yasin/test/DATA/part.tbl" for reading: No such file or directory
+STATEMENT:  COPY PART FROM '/home/yasin/test/DATA/part.tbl' WITH DELIMITER '|';
+	
+	COPY SUPPLIER FROM '/home/yasin/test/DATA/supplier.tbl' WITH DELIMITER '|';
+	
+	COPY PARTSUPP FROM '/home/yasin/test/DATA/partsupp.tbl' WITH DELIMITER '|';
+	
+	COPY ORDERS FROM '/home/yasin/test/DATA/orders.tbl' WITH DELIMITER '|';
+	
+	COPY LINEITEM FROM '/home/yasin/test/DATA/lineitem.tbl' WITH DELIMITER '|';
+	
+	COPY NATION FROM '/home/yasin/test/DATA/nation.tbl' WITH DELIMITER '|';
+	
+	COPY REGION FROM '/home/yasin/test/DATA/region.tbl' WITH DELIMITER '|';
+	
+	
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (10 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (10 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (12 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (9 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (10 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (10 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (11 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (14 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (12 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (12 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+LOG:  checkpoints are occurring too frequently (12 seconds apart)
+HINT:  Consider increasing the configuration parameter "checkpoint_segments".
+ERROR:  column "refdate" of relation "refrevlevels" does not exist at character 71
+STATEMENT:  
+	CREATE TABLE MktCmpRefDates(refDate date);
+	
+	INSERT INTO RefRevLevels(refDate) values ('1992-02-14');
+	INSERT INTO RefRevLevels(refDate) values ('1992-11-24');
+	INSERT INTO RefRevLevels(refDate) values ('1992-12-24');
+	INSERT INTO RefRevLevels(refDate) values ('1993-12-24');
+	INSERT INTO RefRevLevels(refDate) values ('1994-02-14');
+	INSERT INTO RefRevLevels(refDate) values ('1994-12-24');
+	INSERT INTO RefRevLevels(refDate) values ('1995-11-24');
+	INSERT INTO RefRevLevels(refDate) values ('1995-12-24');
+	INSERT INTO RefRevLevels(refDate) values ('1997-02-14');
+	INSERT INTO RefRevLevels(refDate) values ('1997-12-24');
+	
+ERROR:  table "mktcmprefdates" does not exist
+STATEMENT:  DROP TABLE MktCmpRefDates;
+	CREATE TABLE MktCmpRefDates(refDate date);
+	
+	INSERT INTO MktCmpRefDates(refDate) values ('1992-02-14');
+	INSERT INTO MktCmpRefDates(refDate) values ('1992-11-24');
+	INSERT INTO MktCmpRefDates(refDate) values ('1992-12-24');
+	INSERT INTO MktCmpRefDates(refDate) values ('1993-12-24');
+	INSERT INTO MktCmpRefDates(refDate) values ('1994-02-14');
+	INSERT INTO MktCmpRefDates(refDate) values ('1994-12-24');
+	INSERT INTO MktCmpRefDates(refDate) values ('1995-11-24');
+	INSERT INTO MktCmpRefDates(refDate) values ('1995-12-24');
+	INSERT INTO MktCmpRefDates(refDate) values ('1997-02-14');
+	INSERT INTO MktCmpRefDates(refDate) values ('1997-12-24');
+ERROR:  column "orderdate1" does not exist at character 90
+STATEMENT:  select nation, date '1992-01-01' + refDate as refDate, sum_profit from 
+	(
+	select nation, orderdate1 as refDate, sum(amount) as sum_profit
+	from (
+	         select
+	                   n_nationkey as nation,
+	                   (o_orderdate - date '1992-01-01')::int as orderdate,
+	                   l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+	         from      part,supplier,lineitem,partsupp,orders,nation
+	         where     s_suppkey = l_suppkey and ps_suppkey = l_suppkey and ps_partkey = l_partkey
+	                   and p_partkey = l_partkey and o_orderkey = l_orderkey and s_nationkey = n_nationkey
+	                   and p_name like '%green%' 
+	                   and (n_name = 'UNITED STATES' OR n_name = 'UNITED KINGDOM')
+	         ) as profit
+	group by orderdate, nation
+	         AROUND (Select (refDate - date '1992-01-01')::int from MktCmpRefDates)
+	) as T
+	order by 1,2
+ERROR:  missing FROM-clause entry for table "n" at character 8
+STATEMENT:  select N.N_name, date '1992-01-01' + refDate as refDate, sum_profit from 
+	(
+	select nation, orderdate as refDate, sum(amount) as sum_profit
+	from (
+	         select
+	                   n_nationkey as nation,
+	                   (o_orderdate - date '1992-01-01')::int as orderdate,
+	                   l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+	         from      part,supplier,lineitem,partsupp,orders,nation
+	         where     s_suppkey = l_suppkey and ps_suppkey = l_suppkey and ps_partkey = l_partkey
+	                   and p_partkey = l_partkey and o_orderkey = l_orderkey and s_nationkey = n_nationkey
+	                   and p_name like '%green%' 
+	                   and (n_name = 'UNITED STATES' OR n_name = 'UNITED KINGDOM')
+	         ) as profit
+	group by orderdate, nation
+	         AROUND (Select (refDate - date '1992-01-01')::int from MktCmpRefDates)
+	) as T, Nation  where N.nationkey= T.n_nationkey
+	order by 1,2
+ERROR:  column n.nationkey does not exist at character 913
+STATEMENT:  select N.N_name, date '1992-01-01' + refDate as refDate, sum_profit from 
+	(
+	select nation, orderdate as refDate, sum(amount) as sum_profit
+	from (
+	         select
+	                   n_nationkey as nation,
+	                   (o_orderdate - date '1992-01-01')::int as orderdate,
+	                   l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+	         from      part,supplier,lineitem,partsupp,orders,nation
+	         where     s_suppkey = l_suppkey and ps_suppkey = l_suppkey and ps_partkey = l_partkey
+	                   and p_partkey = l_partkey and o_orderkey = l_orderkey and s_nationkey = n_nationkey
+	                   and p_name like '%green%' 
+	                   and (n_name = 'UNITED STATES' OR n_name = 'UNITED KINGDOM')
+	         ) as profit
+	group by orderdate, nation
+	         AROUND (Select (refDate - date '1992-01-01')::int from MktCmpRefDates)
+	) as T, Nation as N  where N.nationkey= T.n_nationkey
+	order by 1,2
+ERROR:  column t.n_nationkey does not exist at character 928
+STATEMENT:  select N.N_name, date '1992-01-01' + refDate as refDate, sum_profit from 
+	(
+	select nation, orderdate as refDate, sum(amount) as sum_profit
+	from (
+	         select
+	                   n_nationkey as nation,
+	                   (o_orderdate - date '1992-01-01')::int as orderdate,
+	                   l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+	         from      part,supplier,lineitem,partsupp,orders,nation
+	         where     s_suppkey = l_suppkey and ps_suppkey = l_suppkey and ps_partkey = l_partkey
+	                   and p_partkey = l_partkey and o_orderkey = l_orderkey and s_nationkey = n_nationkey
+	                   and p_name like '%green%' 
+	                   and (n_name = 'UNITED STATES' OR n_name = 'UNITED KINGDOM')
+	         ) as profit
+	group by orderdate, nation
+	         AROUND (Select (refDate - date '1992-01-01')::int from MktCmpRefDates)
+	) as T, Nation as N  where N.n_nationkey= T.n_nationkey
+	order by 1,2
+LOG:  received smart shutdown request
+LOG:  shutting down
+LOG:  database system is shut down

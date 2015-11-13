@@ -1,0 +1,224 @@
+9
+
+dir
+0
+http://javaforge.com/svn/sgball/postgresql-8.2.4/Release/contrib
+http://javaforge.com/svn/sgball
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+0a4747ff-3d01-0010-a474-c36612468616
+
+adminpack
+dir
+
+
+
+add
+
+btree_gist
+dir
+
+
+
+add
+
+chkpass
+dir
+
+
+
+add
+
+cube
+dir
+
+
+
+add
+
+dblink
+dir
+
+
+
+add
+
+earthdistance
+dir
+
+
+
+add
+
+fuzzystrmatch
+dir
+
+
+
+add
+
+hstore
+dir
+
+
+
+add
+
+intagg
+dir
+
+
+
+add
+
+intarray
+dir
+
+
+
+add
+
+isn
+dir
+
+
+
+add
+
+lo
+dir
+
+
+
+add
+
+ltree
+dir
+
+
+
+add
+
+oid2name
+dir
+
+
+
+add
+
+pg_buffercache
+dir
+
+
+
+add
+
+pg_freespacemap
+dir
+
+
+
+add
+
+pg_trgm
+dir
+
+
+
+add
+
+pgbench
+dir
+
+
+
+add
+
+pgcrypto
+dir
+
+
+
+add
+
+pgrowlocks
+dir
+
+
+
+add
+
+pgstattuple
+dir
+
+
+
+add
+
+seg
+dir
+
+
+
+add
+
+spi
+dir
+
+
+
+add
+
+sslinfo
+dir
+
+
+
+add
+
+tablefunc
+dir
+
+
+
+add
+
+tsearch2
+dir
+
+
+
+add
+
+vacuumlo
+dir
+
+
+
+add
+
+xml2
+dir
+
+
+
+add
+
