@@ -51,7 +51,7 @@ select  avg(col1) as centerx, avg(col2) as centery
 min(col1) as p1x, min(col2) as p1y
 max(col1) as p2x, max(col2) as p2y from tmp
 group by col1, col2 distanceall within 2
-on_overlapnew_group 
+on_overlap new_group 
 metric lone;             
    			 
 
